@@ -139,6 +139,26 @@
       z-index: 5;
     }
 
+
+    .contact-link {
+      color: #00BFFF;
+      text-decoration: none;
+      font-size: 1rem;
+      margin-top: 20px;
+      display: block;
+      text-shadow: 0 0 8px rgba(0, 191, 255, 0.7), 0 0 12px rgba(0, 191, 255, 0.5);
+      animation: pulseGlow 2.5s infinite ease-in-out;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        text-shadow: 0 0 8px rgba(0, 191, 255, 0.7), 0 0 12px rgba(0, 191, 255, 0.5);
+      }
+      50% {
+        text-shadow: 0 0 12px rgba(0, 191, 255, 1), 0 0 18px rgba(0, 191, 255, 0.8);
+      }
+    }
+
 </style>
 </head>
 <body>
@@ -154,7 +174,7 @@
   <div class="subline">
     We design. We source. We install.<br>Technology, engineered.
   </div>
-  <a href="mailto:info@solvantasolutions.com">Contact</a>
+  <a class="contact-link" href="mailto:info@solvantasolutions.com">Make contact now</a>
 
 <script>
   const starCount = 40;
