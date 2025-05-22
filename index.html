@@ -85,7 +85,61 @@
       margin-top: 20px;
       display: block;
     }
-  </style>
+  
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: #b0ffff;
+      border-radius: 50%;
+      animation: twinkle 2s infinite ease-in-out;
+      opacity: 0.6;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+
+
+    .shooting-star {
+      position: absolute;
+      width: 100px;
+      height: 2px;
+      background: linear-gradient(270deg, #b0ffff, rgba(176, 255, 255, 0));
+      opacity: 0;
+      pointer-events: none;
+      transform-origin: left center;
+      animation: shoot 1.2s ease-out forwards;
+      z-index: 0;
+    }
+
+    @keyframes shoot {
+      0% {
+        opacity: 0;
+        transform: translate(0, 0) scaleX(1) rotate(var(--angle, 90deg));
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx, 0px), var(--dy, 300px)) scaleX(0.5) rotate(var(--angle, 90deg));
+      }
+    }
+
+    .copyright {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: #555;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      z-index: 5;
+    }
+
+</style>
 </head>
 <body>
   <div class="orb"></div>
@@ -101,5 +155,46 @@
     We design. We source. We install.<br>Technology, engineered.
   </div>
   <a href="mailto:info@solvantasolutions.com">Contact</a>
+
+<script>
+  const starCount = 40;
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    star.style.top = Math.random() * 100 + 'vh';
+    star.style.left = Math.random() * 100 + 'vw';
+    star.style.animationDelay = (Math.random() * 4) + 's';
+    document.body.appendChild(star);
+  }
+</script>
+
+<script>
+  function createShootingStar() {
+    const star = document.createElement('div');
+    star.classList.add('shooting-star');
+
+    const startX = Math.random() * window.innerWidth;
+    const startY = Math.random() * window.innerHeight * 0.3;  // Top 30% of screen
+    const angle = 75 + Math.random() * 30;  // Angle between 75° and 105°
+    const dx = Math.cos(angle * Math.PI / 180) * 300;
+    const dy = Math.sin(angle * Math.PI / 180) * 300;
+
+    star.style.top = startY + 'px';
+    star.style.left = startX + 'px';
+    star.style.setProperty('--angle', `${angle}deg`);
+    star.style.setProperty('--dx', `${dx}px`);
+    star.style.setProperty('--dy', `${dy}px`);
+
+    document.body.appendChild(star);
+    setTimeout(() => document.body.removeChild(star), 1300);
+  }
+
+  setInterval(() => {
+    createShootingStar();
+  }, 5000);
+</script>
+<div class="copyright">© 2025 Solvanta Solutions LLC</div>
 </body>
+
+
 </html>
