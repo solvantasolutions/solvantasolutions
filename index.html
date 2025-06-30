@@ -13,40 +13,22 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      overflow-x: hidden;
-      overflow-y: auto;
+      min-height: 100vh;
       text-align: center;
       padding-top: 60px;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
-
-    .orb {
-      width: 220px;
-      height: 220px;
-      background-image: 
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      animation: rotate 20s linear infinite;
-      border-radius: 50%;
-    }
-
-    @keyframes rotate {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
     .hex-logo {
       margin-top: 20px;
       margin-bottom: 5px;
     }
-
     .hex-logo img {
       width: 220px;
       height: auto;
       box-shadow: 0 0 32px #00bfff66;
       border-radius: 20px;
     }
-
     .subline {
       margin-top: 25px;
       font-size: 1rem;
@@ -55,7 +37,6 @@
       line-height: 1.5;
       padding: 0 20px;
     }
-
     .contact-link {
       color: #00BFFF;
       text-decoration: none;
@@ -66,7 +47,6 @@
       text-shadow: 0 0 8px rgba(0, 191, 255, 0.7), 0 0 12px rgba(0, 191, 255, 0.5);
       animation: pulseGlow 2.5s infinite ease-in-out;
     }
-
     @keyframes pulseGlow {
       0%, 100% {
         text-shadow: 0 0 8px rgba(0, 191, 255, 0.7), 0 0 12px rgba(0, 191, 255, 0.5);
@@ -75,7 +55,6 @@
         text-shadow: 0 0 12px rgba(0, 191, 255, 1), 0 0 18px rgba(0, 191, 255, 0.8);
       }
     }
-  
     .star {
       position: absolute;
       width: 2px;
@@ -85,12 +64,10 @@
       animation: twinkle 2s infinite ease-in-out;
       opacity: 0.6;
     }
-
     @keyframes twinkle {
       0%, 100% { opacity: 0.3; transform: scale(1); }
       50% { opacity: 1; transform: scale(1.5); }
     }
-
     .shooting-star {
       position: absolute;
       width: 100px;
@@ -102,7 +79,6 @@
       animation: shoot 1.2s ease-out forwards;
       z-index: 0;
     }
-
     @keyframes shoot {
       0% {
         opacity: 0;
@@ -116,7 +92,35 @@
         transform: translate(var(--dx, 0px), var(--dy, 300px)) scaleX(0.5) rotate(var(--angle, 90deg));
       }
     }
-
+    .spaceship {
+      position: absolute;
+      width: 20px;
+      height: 12px;
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAAbklEQVR4nGNgoDJgJKTgxP//z9DFLBgZpXCpZyLVMHzieA3EpwmfPF4XkgOobiBGpORd+v8fxo7SZXiOS+OyywySMPYkPUa4OXAGskHIAJuhyIYhg0l6jIwsuFxASDMuQN8wJBZgDUNyDEY2CAYAW2EqVotJ9AwAAAAASUVORK5CYII=');
+      background-size: contain;
+      background-repeat: no-repeat;
+      z-index: 999;
+    }
+    .spaceship.left {
+      left: -40px;
+      animation: flyRight 10s linear forwards;
+    }
+    .spaceship.right {
+      left: auto;
+      right: -40px;
+      transform: scaleX(-1);
+      animation: flyLeft 10s linear forwards;
+    }
+    @keyframes flyRight {
+      0% { transform: translateX(0); opacity: 1; }
+      95% { opacity: 1; }
+      100% { transform: translateX(130vw); opacity: 0; }
+    }
+    @keyframes flyLeft {
+      0% { transform: translateX(0); opacity: 1; }
+      95% { opacity: 1; }
+      100% { transform: translateX(-130vw); opacity: 0; }
+    }
     .copyright {
       position: fixed;
       bottom: 10px;
@@ -127,66 +131,24 @@
       letter-spacing: 1px;
       z-index: 5;
     }
-
-    .spaceship {
-      position: absolute;
-      width: 20px;
-      height: 12px;
-      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAAbklEQVR4nGNgoDJgJKTgxP//z9DFLBgZpXCpZyLVMHzieA3EpwmfPF4XkgOobiBGpORd+v8fxo7SZXiOS+OyywySMPYkPUa4OXAGskHIAJuhyIYhg0l6jIwsuFxASDMuQN8wJBZgDUNyDEY2CAYAW2EqVotJ9AwAAAAASUVORK5CYII=');
-      background-size: contain;
-      background-repeat: no-repeat;
-      z-index: 999;
-    }
-
-    .spaceship.left {
-      left: -40px;
-      animation: flyRight 10s linear forwards;
-    }
-
-    .spaceship.right {
-      left: auto;
-      right: -40px;
-      transform: scaleX(-1);
-      animation: flyLeft 10s linear forwards;
-    }
-
-    @keyframes flyRight {
-      0% { transform: translateX(0); opacity: 1; }
-      95% { opacity: 1; }
-      100% { transform: translateX(130vw); opacity: 0; }
-    }
-
-    @keyframes flyLeft {
-      0% { transform: translateX(0); opacity: 1; }
-      95% { opacity: 1; }
-      100% { transform: translateX(-130vw); opacity: 0; }
-    }
-
   </style>
 </head>
 <body>
-  <div class="orb"></div>
   <div class="hex-logo">
     <img src="solvanta_logo.png" alt="Solvanta Solutions Logo">
   </div>
   <div class="subline">
     Every problem.<br>Engineered to a solution.<br><br><br><br>Technology & AI solutions for home and business needs.<br><br>
   </div>
-  <!-- Solvanta AI Coming Soon Section -->
   <div style="margin-top:60px; margin-bottom:40px; text-align:center;">
     <div style="color:#1dafff; font-size:1.5rem; font-weight:600; margin-bottom:28px; letter-spacing:1px; text-shadow:0 0 12px #009fff88;">
       Solvanta AI &copy; coming soon
     </div>
-    <div style="display: flex; justify-content: center; gap: 60px; max-width: 900px; margin: 0 auto;">
-      <img src="Solvanta1.png" alt="Solvanta 1" style="width:180px;box-shadow:0 0 32px #0cf7; border-radius:24px;">
-      <img src="Solvanta2.png" alt="Solvanta 2" style="width:180px;box-shadow:0 0 32px #0cf7; border-radius:24px;">
-      <img src="Solvanta3.png" alt="Solvanta 3" style="width:180px;box-shadow:0 0 32px #0cf7; border-radius:24px;">
-    </div>
   </div>
-
   <a class="contact-link" href="mailto:info@solvantasolutions.com">Make contact now</a>
 
   <script>
+    // Stars
     const starCount = 40;
     for (let i = 0; i < starCount; i++) {
       const star = document.createElement('div');
@@ -196,7 +158,7 @@
       star.style.animationDelay = (Math.random() * 4) + 's';
       document.body.appendChild(star);
     }
-
+    // Shooting Stars
     function createShootingStar() {
       const star = document.createElement('div');
       star.classList.add('shooting-star');
@@ -213,24 +175,17 @@
       document.body.appendChild(star);
       setTimeout(() => document.body.removeChild(star), 1300);
     }
+    setInterval(() => { createShootingStar(); }, 5000);
 
-    setInterval(() => {
-      createShootingStar();
-    }, 5000);
-  </script>
-  <div class="copyright">© 2025 Solvanta Solutions LLC - All rights reserved - info@solvantasolutions.com</div>
-
-  <script>
+    // Spaceship
     let direction = 'left';
     function launchSpaceship() {
       const ship = document.createElement('div');
       ship.classList.add('spaceship');
       ship.classList.add(direction);
-
       // Randomize top position within 40% to 75%
       const randTop = 40 + Math.random() * 35;
       ship.style.top = randTop + '%';
-
       document.body.appendChild(ship);
       setTimeout(() => {
         if (ship && ship.parentNode) {
@@ -239,8 +194,8 @@
       }, 10500);
       direction = direction === 'left' ? 'right' : 'left';
     }
-
     setInterval(launchSpaceship, 15000);
   </script>
+  <div class="copyright">© 2025 Solvanta Solutions LLC - All rights reserved - info@solvantasolutions.com</div>
 </body>
 </html>
