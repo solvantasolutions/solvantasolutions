@@ -1061,8 +1061,8 @@ footer {
   <p class="cta-sub reveal">
     Tell us what you need. We'll tell you what's possible. The conversation is confidential, the solutions are custom, and the results speak for themselves.
   </p>
-  <a href="/cdn-cgi/l/email-protection#7910171f16390a16150f18170d180a16150c0d1016170a571a1614" class="cta-btn reveal">
-    ✉ <span class="__cf_email__" data-cfemail="2940474f46695a46455f48475d485a46455c5d4046475a074a4644">[email&#160;protected]</span>
+  <a href="mailto:info@solvantasolutions.com" class="cta-btn reveal">
+    ✉ info@solvantasolutions.com
   </a>
   <p class="email-display reveal">All inquiries handled with complete discretion.</p>
 </section>
@@ -1092,11 +1092,11 @@ footer {
     <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.2em;color:rgba(240,238,255,0.45);text-transform:uppercase;">Veteran Owned &amp; Operated</span>
   </div>
   <div class="footer-right">
-    <div class="footer-copy">© 2026 Solvanta Solutions LLC · <a href="/cdn-cgi/l/email-protection#0861666e67487b67647e69667c697b67647d7c6167667b266b6765" style="color:rgba(255,0,153,0.6);text-decoration:none;"><span class="__cf_email__" data-cfemail="afc6c1c9c0efdcc0c3d9cec1dbcedcc0c3dadbc6c0c1dc81ccc0c2">[email&#160;protected]</span></a></div>
+    <div class="footer-copy">© 2026 Solvanta Solutions LLC · <a href="mailto:info@solvantasolutions.com" style="color:rgba(255,0,153,0.6);text-decoration:none;">info@solvantasolutions.com</a></div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── CURSOR ──────────────────────────────────
 const cur = document.getElementById('cur');
 const ring = document.getElementById('cur-ring');
@@ -1143,45 +1143,56 @@ const obs = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// ── SOUND — unmute on first interaction ──────
+// ── SOUND & VIDEO ────────────────────────────
 (function() {
   const vid = document.getElementById('hero-video');
   const btn = document.getElementById('unmute-btn');
+  const overlay = document.getElementById('sound-overlay');
+  const overlayBtn = document.getElementById('sound-overlay-btn');
+
+  function dismissOverlay() {
+    if (overlay) {
+      overlay.style.opacity = '0';
+      setTimeout(function() { if (overlay) overlay.remove(); }, 400);
+    }
+  }
 
   function unmute() {
     if (!vid) return;
     vid.muted = false;
     vid.volume = 1.0;
     vid.play().catch(function() { vid.muted = true; });
-    if (btn) { btn.textContent = vid.muted ? '🔇' : '🔊'; }
-    var ov = document.getElementById('sound-overlay');
-    if (ov) ov.style.opacity = '0';
-    setTimeout(function() { if (ov) ov.remove(); }, 400);
+    if (btn) btn.textContent = vid.muted ? '🔇' : '🔊';
+    dismissOverlay();
   }
 
   document.addEventListener('click', unmute, { once: true });
-  document.addEventListener('touchstart', unmute, { once: true });
+  document.addEventListener('touchstart', unmute, { once: true, passive: true });
 
-  if (btn) {
-    btn.onclick = function() {
-      vid.muted = !vid.muted;
-      if (!vid.muted) vid.volume = 1.0;
-      btn.textContent = vid.muted ? '🔇' : '🔊';
-    };
+  if (overlayBtn) overlayBtn.addEventListener('click', unmute);
+
+  if (btn) btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    vid.muted = !vid.muted;
+    if (!vid.muted) vid.volume = 1.0;
+    btn.textContent = vid.muted ? '🔇' : '🔊';
+  });
+
+  if (vid) {
+    vid.addEventListener('error', function() {
+      const wrap = document.getElementById('video-wrap');
+      if (!wrap) return;
+      const logoImg = document.querySelector('.footer-logo img');
+      const img = document.createElement('img');
+      img.src = logoImg ? logoImg.src : '';
+      img.alt = 'Solvanta';
+      img.style.cssText = 'width:120px;filter:drop-shadow(0 0 40px rgba(255,0,153,0.6));';
+      wrap.innerHTML = '';
+      wrap.appendChild(img);
+      wrap.style.cssText = 'background:radial-gradient(circle,rgba(139,31,204,0.3) 0%,transparent 70%);display:flex;align-items:center;justify-content:center;min-height:300px;';
+    });
   }
 })();
-
-// ── VIDEO FALLBACK ───────────────────────────
-const vid = document.getElementById('hero-video');
-vid.addEventListener('error', () => {
-  const wrap = document.getElementById('video-wrap');
-  wrap.innerHTML = '<img src="' + document.querySelector('.footer-logo img').src + '" style="width:120px;filter:drop-shadow(0 0 40px rgba(255,0,153,0.6));" alt="Solvanta">';
-  wrap.style.background = 'radial-gradient(circle, rgba(139,31,204,0.3) 0%, transparent 70%)';
-  wrap.style.display = 'flex';
-  wrap.style.alignItems = 'center';
-  wrap.style.justifyContent = 'center';
-  wrap.style.minHeight = '300px';
-});
 </script>
 </body>
 </html>
